@@ -20,10 +20,10 @@ func NewLogger() *Logger {
 
 func (l *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	start := time.Now()
-	l.Printf("Started %s %s", r.Method, r.URL.Path)
+	l.Printf("Started %s %s %s", r.Method, r.URL.Path,r)
 
 	next(rw, r)
 
 	res := rw.(ResponseWriter)
-	l.Printf("Completed %s:: %v %s in %v",res, res.Status(), http.StatusText(res.Status()), time.Since(start))
+	l.Printf("Completed %s: %v %s in %v",res, res.Status(), http.StatusText(res.Status()), time.Since(start))
 }
